@@ -1,35 +1,23 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"sync"
+	"strings"
 )
-func one(wg *sync.WaitGroup){
-	defer wg.Done()
-	fmt.Println("hola")
-}
 
-func two( wg *sync.WaitGroup){
-	defer wg.Done()
-	fmt.Println("Ni hao")
+//domnstrate flags
 
-}
-
-	func three( wg *sync.WaitGroup){
-	defer wg.Done()
-	fmt.Println("Hello")
-
-}
 func main(){
-	var wg sync.WaitGroup
-	wg.Add(3)
-	go one(&wg)
-	go two(&wg)
-	go three(&wg)
+	msg := flag.String("msg", "Howdy, stranger!", "the message")
+	num:= flag.Int("num", 1 ,"How many times to print the message")
+	caps:= flag.Int("num", 1 ,"Should print in all caps")
+	
+	flag.Parse()
+
+	for i := 0; i < *num; i++{
+		fmt.Println(*msg)
+	}
 
 
-
-	//lets Delay
-
-	wg.Wait()
-}
+	}
